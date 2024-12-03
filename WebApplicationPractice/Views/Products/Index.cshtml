@@ -1,0 +1,36 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model List<WebApplicationPractice.Models.Product>
+
+<h1>Products</h1>
+
+<a class="btn btn-primary mb-3" asp-controller="Products" asp-action="Create">Add New Product</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr class="table-active">
+            <th>Name</th> 
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.GetFormattedPrice()</td>
+                <td>
+                    <a type ="submit" class="btn btn-warning" asp-controller="Products" asp-action="Edit" asp-route-id="@product.Id">Edit</a>
+                    <form asp-controller="Products" asp-action="Delete" asp-route-id="@product.Id" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
